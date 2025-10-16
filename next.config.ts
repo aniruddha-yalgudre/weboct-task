@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'www.presidentialpark.in',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'files.peachworlds.com',
         pathname: '/**',
       },

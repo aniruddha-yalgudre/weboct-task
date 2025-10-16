@@ -3,7 +3,14 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 
-const AMENITIES = [
+// Define Amenity type explicitly instead of using typeof AMENITIES[0]
+type Amenity = {
+  name: string;
+  image: string;
+  speed: string;
+};
+
+const AMENITIES: Amenity[] = [
   { name: "Club house", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", speed: "0.5" },
   { name: "Swimming pool", image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80", speed: "0.8" },
   { name: "Indoor games", image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80", speed: "0.3" },
@@ -28,9 +35,14 @@ const AMENITIES = [
   { name: "Sand Pit", image: "https://images.unsplash.com/photo-1444065381814-865dc9da92c0?auto=format&fit=crop&w=800&q=80", speed: "0.7" },
 ];
 
-const AmenityCard = ({ amenity, index }: { amenity: typeof AMENITIES[0], index: number }) => {
+interface AmenityCardProps {
+  amenity: Amenity;
+  index: number;
+}
+
+const AmenityCard: React.FC<AmenityCardProps> = ({ amenity, index }) => {
   return (
-    <div 
+    <div
       className="amenity-card group cursor-pointer"
       data-scroll
       data-scroll-speed={amenity.speed}
@@ -47,11 +59,9 @@ const AmenityCard = ({ amenity, index }: { amenity: typeof AMENITIES[0], index: 
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             priority={index < 8}
           />
-          
           {/* Gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        
         {/* Minimal text at bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
           <h3 className="text-white font-semibold text-sm md:text-base leading-tight drop-shadow-lg">
@@ -68,7 +78,8 @@ export default function AmenitiesSection() {
 
   useEffect(() => {
     // Initialize locomotive scroll if available
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const locomotiveScroll = (window as any).locomotiveScroll;
       if (locomotiveScroll) {
         locomotiveScroll.update();
@@ -77,22 +88,23 @@ export default function AmenitiesSection() {
   }, []);
 
   return (
-    <div 
+    <div
       ref={sectionRef}
-      className="relative w-full min-h-screen py-16 px-4 md:px-6"
+      className="relative w-full min-h-screen py-16 px-4 md:px-8"
       data-scroll-section
     >
       {/* Header Section */}
-      <div 
-        className="text-center mb-16"
-      >
-        <h2 
+      <div className="text-center mb-16">
+        <h2
           className="font-serif text-accent drop-shadow-lg text-3xl md:text-5xl lg:text-6xl uppercase tracking-tight mb-6"
-          style={{ letterSpacing: "0.05em", textShadow: "0 2px 10px rgba(70,70,110,0.23)" }}
+          style={{
+            letterSpacing: "0.05em",
+            textShadow: "0 2px 10px rgba(70,70,110,0.23)",
+          }}
         >
           Premium Amenities
         </h2>
-        <p 
+        <p
           className="text-foreground/80 text-lg md:text-xl mb-8 font-medium max-w-3xl mx-auto bg-white/20 rounded-xl py-3 px-6 backdrop-blur-sm shadow-lg"
           style={{ textShadow: "0 2px 30px #fff2" }}
         >
@@ -103,7 +115,7 @@ export default function AmenitiesSection() {
       {/* Grid Layout - 4 columns, auto rows */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mx-auto mb-16">
         {AMENITIES.map((amenity, index) => (
-          <AmenityCard 
+          <AmenityCard
             key={`${amenity.name}-${index}`}
             amenity={amenity}
             index={index}
@@ -112,7 +124,7 @@ export default function AmenitiesSection() {
       </div>
 
       {/* CTA Button */}
-      <div 
+      <div
         className="text-center"
         data-scroll
         data-scroll-speed="0.1"

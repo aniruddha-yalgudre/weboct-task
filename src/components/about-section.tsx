@@ -75,7 +75,7 @@ export function AboutSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">Customer-Centric Approach</h3>
-                    <p className="text-gray-600">We prioritize our clients' needs and dreams, ensuring personalized service throughout the journey.</p>
+                    <p className="text-gray-600">We prioritize our clients&apos; needs and dreams, ensuring personalized service throughout the journey.</p>
                   </div>
                 </div>
   

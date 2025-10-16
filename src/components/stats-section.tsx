@@ -1,6 +1,8 @@
 // Stats section with architectural project details using modern horizontal layout
 // Uses the primary color for main text as accent as per the new style directive
 
+import Image from "next/image";
+
 export default function StatsSection() {
     return (
         <section className="py-16 md:py-32">
@@ -46,12 +48,12 @@ export default function StatsSection() {
                             </p>
                             <div className="mt-6 space-y-3">
                                 <cite className="block font-medium text-accent">Satisfied Customer</cite>
-                                <img
+                                <Image
                                     className="h-5 w-auto dark:invert"
                                     src="https://www.presidentialpark.in/assets/imgs/footerlo.png"
                                     alt="Presidential Park Logo"
                                     height={20}
-                                    width="auto"
+                                    width={20}
                                 />
                             </div>
                         </blockquote>

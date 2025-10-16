@@ -17,12 +17,14 @@ const NAV_LINKS = [
   { name: "Enquiry", href: "#enquiry" },
 ];
 
+import Link from "next/link";
+import Image from "next/image";
 function Architectlogo({ className = "" }: { className?: string }) {
   return (
-    <a href="/" aria-label="Home">
-      <img src="https://www.presidentialpark.in/assets/imgs/footerlo.png" alt="" width={40} height={40} className={className} />
-    </a>
-);
+    <Link href="/" aria-label="Home">
+      <Image src="https://www.presidentialpark.in/assets/imgs/footerlo.png" alt="Presidential Park Logo" width={40} height={40} className={className} />
+    </Link>
+  );
 }
 
 export default function Navbar() {
