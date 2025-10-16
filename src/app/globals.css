@@ -1,26 +1,153 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+
+  /* map to Next font variables */
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
+  /* optional serif token for components to use */
+  --font-serif: var(--font-playfair);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+
+  /* Luxury palette */
+  --background: #F8F8F8;         /* Soft white */
+  --foreground: #0A1D37;         /* Deep Navy for text */
+  --card: #FFFFFF;
+  --card-foreground: #0A1D37;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A1D37;
+
+  --primary: #0A1D37;            /* Deep Navy */
+  --primary-foreground: #F8F8F8;  /* Soft white */
+  --secondary: #0F2A4F;          /* Deeper navy tint */
+  --secondary-foreground: #F8F8F8;
+
+  --muted: #EFF1F4;              /* subtle gray-blue */
+  --muted-foreground: #34465F;
+
+  --accent: #C9A33B;             /* Gold */
+  --accent-foreground: #0A1D37;
+
+  --destructive: #B00020;
+
+  --border: #E4E6EA;
+  --input: #E4E6EA;
+  --ring: #C9A33B;               /* Gold focus ring */
+
+  /* optional charts (kept neutral) */
+  --chart-1: #4C6EF5;
+  --chart-2: #22B8CF;
+  --chart-3: #FAB005;
+  --chart-4: #40C057;
+  --chart-5: #BE4BDB;
+
+  /* sidebar tokens */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0A1D37;
+  --sidebar-primary: #0A1D37;
+  --sidebar-primary-foreground: #F8F8F8;
+  --sidebar-accent: #C9A33B;
+  --sidebar-accent-foreground: #0A1D37;
+  --sidebar-border: #E4E6EA;
+  --sidebar-ring: #C9A33B;
+}
+
+.dark {
+  --background: #0A1D37;
+  --foreground: #F8F8F8;
+
+  --card: #0F2542;
+  --card-foreground: #F8F8F8;
+  --popover: #0F2542;
+  --popover-foreground: #F8F8F8;
+
+  --primary: #C9A33B;              /* Gold as primary in dark for contrast */
+  --primary-foreground: #0A1D37;
+
+  --secondary: #0C1C32;
+  --secondary-foreground: #F8F8F8;
+
+  --muted: #0C1C32;
+  --muted-foreground: #C7D0DD;
+
+  --accent: #C9A33B;
+  --accent-foreground: #0A1D37;
+
+  --destructive: #FF5A5F;
+  --border: #1C2C46;
+  --input: #213558;
+  --ring: #C9A33B;
+
+  --chart-1: #91A7FF;
+  --chart-2: #66D9E8;
+  --chart-3: #FFD43B;
+  --chart-4: #63E6BE;
+  --chart-5: #DA77F2;
+
+  --sidebar: #0F2542;
+  --sidebar-foreground: #F8F8F8;
+  --sidebar-primary: #C9A33B;
+  --sidebar-primary-foreground: #0A1D37;
+  --sidebar-accent: #C9A33B;
+  --sidebar-accent-foreground: #0A1D37;
+  --sidebar-border: #1C2C46;
+  --sidebar-ring: #C9A33B;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-poppins), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  h1, h2, h3 {
+    font-family: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
 }
